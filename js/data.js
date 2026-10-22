@@ -114,7 +114,7 @@
 
   // H1 / L2: boda de ejemplo con datos ficticios
   const EXAMPLE = {
-    names: ["Laura", "Andrés"],
+    names: ["Isabella", "Gabriel"],
     phone: "+57 300 000 0100",
     date: "2026-12-12",
     ceremonyTime: 16 * 60,
@@ -122,7 +122,7 @@
     receptionEnd: 25 * 60,
     ceremonyType: "religiosa",
     city: "Rionegro, Antioquia",
-    places: { ceremonia: "Capilla del Bosque", recepcion: "Hacienda Los Almendros", preparacion: "Casa de Laura" },
+    places: { ceremonia: "Capilla del Bosque", recepcion: "Hacienda Los Almendros", preparacion: "Casa de Isabella" },
     guests: 120,
     vendors: [
       { cat: "salon", name: "Hacienda Los Almendros", contact: "Marta Ruiz", status: "confirmo", hoursAgo: 72, total: 18000000, paid: 9000000, payDays: 20 },

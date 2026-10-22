@@ -266,7 +266,7 @@
       const who = `${v.name} (proveedor)`;
       if (sv.status === "sin_invitar") return;
       v.sentAt = sv.status === "invitado" ? at : at - 6 * H;
-      add(v.sentAt, { by: "pareja", who: "Laura (titular)", vendorId: v.id, text: "Envió el enlace por WhatsApp. SMS y correo automáticos enviados." });
+      add(v.sentAt, { by: "pareja", who: `${X.names[0]} (titular)`, vendorId: v.id, text: "Envió el enlace por WhatsApp. SMS y correo automáticos enviados." });
       if (sv.status === "invitado") { v.status = "invitado"; v.statusAt = at; return; }
       v.openedAt = sv.status === "abrio" ? at : at - 2 * H;
       add(v.openedAt, { by: "proveedor", who, vendorId: v.id, text: "Abrió su enlace" });
@@ -283,7 +283,7 @@
       v.statusBy = sv.byCouple ? "pareja" : "proveedor";
       v.statusNote = sv.byCouple || "";
       add(at, sv.byCouple
-        ? { by: "pareja", who: "Andrés (co-organizador)", vendorId: v.id, text: `Marcó "Confirmó" a nombre del proveedor: ${sv.byCouple}` }
+        ? { by: "pareja", who: `${X.names[1]} (co-organizador)`, vendorId: v.id, text: `Marcó "Confirmó" a nombre del proveedor: ${sv.byCouple}` }
         : { by: "proveedor", who, vendorId: v.id, text: "Confirmó su hora" });
     });
     e.log = entries.sort((a, b) => a.at - b.at);
