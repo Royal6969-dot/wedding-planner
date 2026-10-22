@@ -1,0 +1,12 @@
+{
+  "name": "Coolplanners",
+  "short_name": "Coolplanners",
+  "description": "Coordina a los proveedores de tu boda en un solo cronograma.",
+  "lang": "es-CO",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#FAF7F5",
+  "theme_color": "#1F1B2D",
+  "icons": [{ "src": "assets/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+}
