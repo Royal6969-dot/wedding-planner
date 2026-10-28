@@ -2213,9 +2213,42 @@
       reader.readAsText(el.files[0]);
     }
   });
-  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && state.ui.sheet) closeSheet(); });
+  document.addEventListener("keydown", (e) => {
+    if (e.key !== "Escape") return;
+    if ($("#popup")) ACT["close-popup"]();
+    else if (state.ui.sheet) closeSheet();
+  });
   window.addEventListener("online", () => { if (ev()?.dday.on) render(); });
   window.addEventListener("offline", () => { if (ev()?.dday.on) render(); });
+
+  // ---------- foto emergente al abrir (no en la página del proveedor) ----------
+  function showPopup() {
+    // solo aparece si la foto existe (no está en el repo público)
+    const probe = new Image();
+    probe.onload = () => openPopup();
+    probe.src = imgSrc("popup");
+  }
+  function openPopup() {
+    const el = document.createElement("div");
+    el.className = "popup";
+    el.id = "popup";
+    el.setAttribute("role", "dialog");
+    el.setAttribute("aria-modal", "true");
+    el.setAttribute("aria-label", "Foto");
+    el.innerHTML = `<button class="popup__backdrop" type="button" data-act="close-popup" aria-label="Cerrar"></button>
+      <figure class="popup__card">
+        <img src="${imgSrc("popup")}" alt="Cuatro amigos sonriendo en la playa de Máncora al atardecer" width="1200" height="900">
+        <button class="icon-btn popup__x" type="button" data-act="close-popup" aria-label="Cerrar">${icon("x")}</button>
+      </figure>`;
+    document.body.appendChild(el);
+    document.body.style.overflow = "hidden";
+    $(".popup__x", el).focus({ preventScroll: true });
+  }
+  ACT["close-popup"] = () => {
+    const el = $("#popup");
+    if (el) el.remove();
+    if (!state.ui.sheet) document.body.style.overflow = "";
+  };
 
   // ---------- arranque ----------
   function boot() {
@@ -2238,6 +2271,7 @@
     state.ui.sheet = null;
     history.replaceState({ ui: snapshot() }, "");
     render();
+    if (state.ui.view !== "vendor") showPopup();
   }
 
   if ("serviceWorker" in navigator && !inFrame && location.protocol.startsWith("http")) {
